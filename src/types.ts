@@ -1,9 +1,9 @@
-import { OctreeGeometry } from './loading2/OctreeGeometry';
+import { OctreeGeometry } from "./loading2/OctreeGeometry";
 import { PointCloudOctreeGeometry } from "./point-cloud-octree-geometry";
-import { Box3, Camera, Sphere, Vector3, WebGLRenderer } from 'three';
-import { GetUrlFn, XhrRequest } from './loading/types';
-import { PointCloudOctree } from './point-cloud-octree';
-import { LRU } from './utils/lru';
+import { Box3, Camera, Sphere, Vector3, WebGLRenderer } from "three";
+import { GetUrlFn, XhrRequest } from "./loading/types";
+import { PointCloudOctree } from "./point-cloud-octree";
+import { LRU } from "./utils/lru";
 
 export interface IPointCloudTreeNode {
   id: number;
@@ -21,7 +21,10 @@ export interface IPointCloudTreeNode {
 
   dispose(): void;
 
-  traverse(cb: (node: IPointCloudTreeNode) => void, includeSelf?: boolean): void;
+  traverse(
+    cb: (node: IPointCloudTreeNode) => void,
+    includeSelf?: boolean
+  ): void;
 }
 
 export interface IVisibilityUpdateResult {
@@ -47,12 +50,17 @@ export interface IPotree {
   maxNumNodesLoading: number;
   lru: LRU;
 
-  loadPointCloud(url: string, getUrl: GetUrlFn, xhrRequest?: XhrRequest): Promise<PointCloudOctree>;
+  loadPointCloud(
+    url: string,
+    query: string,
+    getUrl: GetUrlFn,
+    xhrRequest?: XhrRequest
+  ): Promise<PointCloudOctree>;
 
   updatePointClouds(
     pointClouds: PointCloudOctree[],
     camera: Camera,
-    renderer: WebGLRenderer,
+    renderer: WebGLRenderer
   ): IVisibilityUpdateResult;
 }
 
