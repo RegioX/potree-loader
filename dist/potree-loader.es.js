@@ -25673,7 +25673,7 @@ class OctreeLoader {
     return attributes;
   }
   async load(url, query, xhrRequest) {
-    let response = await xhrRequest(`url${query}`);
+    let response = await xhrRequest(`${url}${query}`);
     let metadata = await response.json();
     let attributes = OctreeLoader.parseAttributes(metadata.attributes);
     let loader = new NodeLoader(url, query, this.workerPool, metadata);
@@ -25681,7 +25681,7 @@ class OctreeLoader {
     loader.scale = metadata.scale;
     loader.offset = metadata.offset;
     let octree = new OctreeGeometry(loader, new Box3(new Vector3(...metadata.boundingBox.min), new Vector3(...metadata.boundingBox.max)));
-    octree.url = `url${query}`;
+    octree.url = `${url}${query}`;
     octree.spacing = metadata.spacing;
     octree.scale = metadata.scale;
     let min = new Vector3(...metadata.boundingBox.min);
