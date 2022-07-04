@@ -417,7 +417,7 @@ export class OctreeLoader {
   async load(url: string, query: string, xhrRequest: XhrRequest) {
     // Previously a static method
 
-    let response = await xhrRequest(url);
+    let response = await xhrRequest(`url${query}`);
     let metadata: Metadata = await response.json();
 
     let attributes = OctreeLoader.parseAttributes(metadata.attributes);
@@ -435,7 +435,7 @@ export class OctreeLoader {
         new Vector3(...metadata.boundingBox.max)
       )
     );
-    octree.url = url;
+    octree.url = `url${query}`;
     octree.spacing = metadata.spacing;
     octree.scale = metadata.scale;
 
